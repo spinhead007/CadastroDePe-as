@@ -1,0 +1,90 @@
+cadastro = {}
+
+def menu():
+  #continuar=True
+  while True:
+    print(
+        '\n1-Cadastrar Peças'
+        '\n2-Consultar Peças'
+        '\n3-Remover Peças'
+        '\n4-Sair')
+
+    try:
+      opcao=int(input('>>> :'))
+      if opcao<=4 and opcao>=0:
+        #continuar=False
+        break
+      else:
+        print('Opcão não existe')
+    except:
+      print('Dado inválido')
+
+  return opcao
+
+def cadastrarPeca(codigo):
+    try:
+        print(f'\nCódigo do produto {codigo}')
+
+        nome = input('Por favor entre com o NOME da peça: ')
+        fabricante = input('Por favor entre com o FABRICANTE da peça: ')
+        valor = int(input('Por favor entre com o VALOR(R$) da peça: '))
+
+        cadastro[codigo] = {
+                'nome': nome,
+                'fabricante': fabricante,
+                'valor': valor
+            }
+
+        print(f'\nProduto {nome} cadastrado com sucesso!')
+
+        return codigo + 1
+    except:
+        print('Valor inválido')
+        return codigo
+
+
+def consultarPeca():
+
+    while True:
+        print(
+            "\n1) Consultar Todas as Peças"
+            "\n2) Consulta Peças por Código"
+            "\n3) Consulta Peças por Fabricante"
+            "\n4) Retornar"
+        )
+
+        opcaoSelecionada = input("\nEscolha a opção desejada: ")
+
+        if opcaoSelecionada == '1':
+            print("Todas as peças: ", lista)
+
+        elif opcaoSelecionada == '4':
+            return
+        else:
+            print("\nSelecione uma opção válida!")
+            continue
+
+def listagemPecas(lista):
+    for cadastro in lista:
+      print('CODIGO: ',cadastro['codigo'],' NOME: ',cadastro['nome'],' FABRICANTE: ',cadastro['fabricante'],' VALOR: ',cadastro['valor'])
+
+
+
+print("\nBem Vindo ao Controle de Estoque da Bicicletaria do Marco Aurelio de Lima Vieira")
+codigo= 1
+cadastro = []
+opcao = menu()
+while opcao != 0:
+  if opcao==1:
+    print('Você Selecionou a Opção de Cadastrar Peça')
+    novaPeca = cadastrarPeca(codigo)
+    codigo+=1
+    cadastro.append(novaPeca)
+  elif opcao == 2:
+    consultarPeca()
+
+  elif opcao == 4:
+    print('Fim do programa')
+    exit()
+
+  opcao = menu()
